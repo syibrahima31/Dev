@@ -16,3 +16,7 @@ def record(request, pk):
     return render(request, "todo/todo.html", {"tache":todo})
 
 
+def delete(request, pk): 
+    tache = Todo.objects.get(id=pk)
+    tache.delete()
+    return redirect('index')
