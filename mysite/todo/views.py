@@ -12,6 +12,7 @@ def index(request):
 
 
 def record(request, pk): 
-    return HttpResponse(f"Page {pk}")
+    todo = Todo.objects.get(id=pk)
+    return render(request, "todo/todo.html", {"tache":todo})
 
 
