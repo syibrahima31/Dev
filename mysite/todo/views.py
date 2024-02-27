@@ -1,15 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
+from .models import Todo
 
 # Create your views here.
 
 def index(request): 
-    data = [
-        {"nom":"Abdou", "age":20, "sexe":"M"},
-        {"nom":"Felix", "age":22, "sexe":"M"},
-        {"nom":"Nabou", "age":19, "sexe":"F"},
-        {"nom":"Eric", "age":28, "sexe":"M"},
-        {"nom":"Jessica", "age":30, "sexe":"F"}
-        ]
-    return render(request, "todo/index.html", {"donnee":data})
+    taches = Todo.objects.all().order_by('id')
+    return render(request, "todo/index.html", {"taches":taches})
+
+
+
+def record(request, pk): 
+    return HttpResponse(f"Page {pk}")
+
+
