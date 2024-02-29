@@ -10,3 +10,14 @@ class UpdateTodoForm(forms.ModelForm):
 
         model = Todo
         fields = ('name', 'completed')
+
+
+class AddTodoForm(forms.ModelForm):
+    """Form definition for AddTodo."""
+
+    class Meta:
+        """Meta definition for AddTodoform."""
+
+        model = Todo
+        fields = ('name','completed')
+

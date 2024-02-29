@@ -1,14 +1,13 @@
 {% extends 'todo/base.html' %}
 
+
 {% block content %}
 
-<form action="{% url 'update' pk=id %}" method="post">
+<form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Modifier</button>
+    <button type="submit">Ajouter</button>
 </form>
-    
 {% endblock content %}
-
 
     

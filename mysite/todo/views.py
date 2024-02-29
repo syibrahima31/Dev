@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Todo
-from .forms import UpdateTodoForm
+from .forms import UpdateTodoForm, AddTodoForm
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 def index(request): 
@@ -35,4 +36,25 @@ def update(request, pk):
         
     else: 
         form = UpdateTodoForm(initial={"name":todo.name})
-        return render(request, "todo/update.html", {"form":form})
+        return render(request, "todo/update.html", {"form":form, 'id':todo.id})
+    
+
+
+def add(request): 
+    if request.method == "POST": 
+        form = AddTodoForm(data=request.POST)
+        if form.is_valid(): 
+            form.save()
+            messages.success(request, 'todo ajouté !')
+            return redirect('index')
+        else: 
+            messages.error(request, 'erreur ajout')
+            return redirect('index')
+    else: 
+        form = AddTodoForm()
+        return render(request, 'todo/add.html', {'form':form})
+
+
+def login_user(request): 
+    if request.method == "POST": 
+        form = AuthenticationForm(data=request.POST)
