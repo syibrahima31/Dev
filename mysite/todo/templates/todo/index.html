@@ -2,6 +2,15 @@
 
 
 {% block content%}
+<div class="container">
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
 
 <div class="container">
     <table class="table table-primary ">
@@ -16,7 +25,7 @@
         <tbody>
         {% for tache in taches %}
           <tr>
-            <th scope="row"> <a href="{% url 'record' pk=tache.id %}"> {{tache.id}} </a></th>
+            <th scope="row"> <a href="{% url 'record' pk=tache.id %}"> {{forloop.counter}} </a></th>
             <td>{{tache.name}}</td>
             <td>{{tache.completed}}</td>
             <td>{{tache.date}}</td>
