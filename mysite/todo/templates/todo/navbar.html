@@ -6,13 +6,25 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          
+          {% if request.user.is_authenticated %}
+            
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'add' %}">AddTodo</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Se Deconnecter</a>
+          </li>
+
+
+          {% else %}
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Connexion</a>
           </li>
-         
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">S'enregistrer</a>
+          </li>
+          {% endif %}
          
         </ul>
       </div>

@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-@login_required
+
 def index(request): 
     taches = Todo.objects.all().order_by('id')
     return render(request, "todo/index.html", {"taches":taches})
@@ -42,7 +42,7 @@ def update(request, pk):
         return render(request, "todo/update.html", {"form":form, 'id':todo.id})
     
 
-@login_required
+
 def add(request): 
     if request.method == "POST": 
         form = AddTodoForm(data=request.POST)
@@ -78,3 +78,7 @@ def login_user(request):
         form = AuthenticationForm()
         return render(request, "todo/login.html", {"form":form})
 
+
+def logout_user(request): 
+    logout(request)
+    return redirect(login_user)
