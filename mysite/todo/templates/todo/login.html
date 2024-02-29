@@ -1,0 +1,17 @@
+{% extends 'todo/base.html' %}
+
+
+
+{% block content %}
+<h1>Se Connecter</h1>
+
+<div>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">connexion</button>
+    </form>
+</div>
+    
+{% endblock content %}
+    
